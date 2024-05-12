@@ -31,7 +31,7 @@ export function HeaderMenu() {
                             <li><Link href="/#inicio" onClick={handleCloseMenu} className="py-0 text-gray-800 hover:text-gray-600">Início</Link></li>
                             <li><Link href="/#sobre" onClick={handleCloseMenu} className="py-0 text-gray-800 hover:text-gray-600">Sobre nós</Link></li>
                             <li><Link href="/#contato" onClick={handleCloseMenu} className="py-0 text-gray-800 hover:text-gray-600">Contato</Link></li>
-                            <li><Link href="/rastrear" className="py-0 text-gray-800 hover:text-gray-600">Rastreamento</Link></li>
+                            <li><Link href="/rastreamento" className="py-0 text-gray-800 hover:text-gray-600">Rastreamento</Link></li>
                         </ul>
                     </nav>
                     <nav className={`absolute w-full mt-64 bg-white right-0 shadow-md transform ${isOpen ? "scale-y-100" : "scale-y-0"} transition-transform duration-300 ease-in-out md:hidden`}>
