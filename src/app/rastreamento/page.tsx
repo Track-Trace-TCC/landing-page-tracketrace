@@ -6,22 +6,22 @@ import { useState } from 'react';
 import TrackBackPage from './@components/trackback_page';
 import axios from 'axios';
 import { LoadingOverlay } from '../components/loading';
+import TrackStatePage, { PackageTrack, Route } from './@components/trackstate_page';
 
 const Rastreamento: NextPage = () => {
     const [isError, setIsError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [route, setRoute] = useState<Route | null>(null);
+    const [packageTrack, setPackageTrack] = useState<PackageTrack | null>(null);
     const onConfirm = async (cpf: string, trackcode: string) => {
         try {
             setLoading(true)
             const url = process.env.NEXT_PUBLIC_API_URL
             const response = await axios.get(`${url}/package/track-code/${trackcode}/cpf/${cpf}`)
-            if (response.status != 200) {
-                return alert("Faz direito porra")
-            }
-
             const data = response.data
-            const directions = await axios.get(`${url}/routes/active/${data?.id_Motorista}`)
-            console.log(directions.data)
+            const routeResponse = await axios.get(`${url}/routes/active/${data?.id_Motorista}`)
+            setPackageTrack(data)
+            setRoute(routeResponse.data)
             setLoading(false)
         } catch (error: any) {
             if (error?.response?.status === 404) {
@@ -33,7 +33,7 @@ const Rastreamento: NextPage = () => {
 
     return (
         <>
-            <div className="w-full h-24 bg-[#E8E8EA] py-4 px-16 mt-16">
+            <div className="w-full h-24 bg-[#E8E8EA] py-4 px-4 lg:px-16  mt-16">
                 <div className='inline-flex h-full p-1'>
                     <div className='w-2 h-full flex-shrink-0 self-stretch rounded-lg bg-primary'></div>
                     <div className="max-w-7xl mx-auto justify-between items-center ml-3">
@@ -55,7 +55,11 @@ const Rastreamento: NextPage = () => {
                 </div>
             </div>
             <LoadingOverlay isLoading={loading} />
-            <TrackBackPage isError={isError} onConfirm={(cpf, trackcode) => onConfirm(cpf, trackcode)} />
+            {
+                route && packageTrack
+                    ? <TrackStatePage route={route} packageTrack={packageTrack} />
+                    : <TrackBackPage isError={isError} onConfirm={(cpf, trackcode) => onConfirm(cpf, trackcode)} />
+            }
         </>
     );
 };
