@@ -5,23 +5,30 @@ import Link from 'next/link';
 import { useState } from 'react';
 import TrackBackPage from './@components/trackback_page';
 import axios from 'axios';
+import { LoadingOverlay } from '../components/loading';
 
 const Rastreamento: NextPage = () => {
-
+    const [isError, setIsError] = useState(false);
+    const [loading, setLoading] = useState(false);
     const onConfirm = async (cpf: string, trackcode: string) => {
-        if (cpf.length < 11) {
+        try {
+            setLoading(true)
+            const url = process.env.NEXT_PUBLIC_API_URL
+            const response = await axios.get(`${url}/package/track-code/${trackcode}/cpf/${cpf}`)
+            if (response.status != 200) {
+                return alert("Faz direito porra")
+            }
 
+            const data = response.data
+            const directions = await axios.get(`${url}/routes/active/${data?.id_Motorista}`)
+            console.log(directions.data)
+            setLoading(false)
+        } catch (error: any) {
+            if (error?.response?.status === 404) {
+                setIsError(true)
+            }
+            setLoading(false)
         }
-        const url = process.env.NEXT_PUBLIC_API_URL
-        const response = await axios.get(`${url}/package/track-code/${trackcode}/cpf/${cpf}`)
-        if (response.status != 200) {
-            return alert("Faz direito porra")
-        }
-
-        const data = response.data
-
-        const directions = await axios.get(`${url}/routes/active/${data?.id_Motorista}`)
-        console.log(directions.data)
     }
 
     return (
@@ -47,7 +54,8 @@ const Rastreamento: NextPage = () => {
                     </div>
                 </div>
             </div>
-            <TrackBackPage onConfirm={(cpf, trackcode) => onConfirm(cpf, trackcode)} />
+            <LoadingOverlay isLoading={loading} />
+            <TrackBackPage isError={isError} onConfirm={(cpf, trackcode) => onConfirm(cpf, trackcode)} />
         </>
     );
 };

@@ -18,6 +18,7 @@ const config = {
       },
     },
     extend: {
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -63,18 +64,15 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
+        bounce: {
+          '0%, 100%': { transform: 'scale(1.0)' },
+          '50%': { transform: 'scale(1.5)' }
+        }
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'bounce200': 'bounce 0.6s infinite 200ms',
+        'bounce400': 'bounce 0.6s infinite 400ms',
+        'bounce600': 'bounce 0.6s infinite 600ms'
       },
     },
   },

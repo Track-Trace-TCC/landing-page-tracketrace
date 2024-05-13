@@ -5,9 +5,10 @@ import { useState } from "react";
 
 interface TrackBackPageProps {
     onConfirm: (cpf: string, trackCode: string) => void;
+    isError?: boolean;
 }
 
-const TrackBackPage: React.FC<TrackBackPageProps> = ({ onConfirm }) => {
+const TrackBackPage: React.FC<TrackBackPageProps> = ({ onConfirm, isError }) => {
     const [name, setName] = useState('');
     const [trackcode, setTrackcode] = useState('');
 
@@ -44,12 +45,13 @@ const TrackBackPage: React.FC<TrackBackPageProps> = ({ onConfirm }) => {
                             placeholder="Código de Rastreamento"
                             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-500 focus:outline-none focus:ring"
                         />
-
+                        <span className="text-red-500">{isError ? 'Não foi encontrado entregas para esses dados' : ''}</span>
                         <div className='w-full flex justify-end'>
                             <button
                                 type="submit"
                                 onClick={handleConfirm}
-                                className="px-4 mt-2 py-2 text-white bg-primary  rounded-md focus:outline-none hover:bg-blue-700"
+                                disabled={name.length < 11 || trackcode.length < 1}
+                                className="px-4 mt-2 py-2 disabled:opacity-75 disabled:cursor-not-allowed text-white bg-primary  rounded-md focus:outline-none hover:bg-blue-700"
                             >
                                 Buscar
                             </button>
