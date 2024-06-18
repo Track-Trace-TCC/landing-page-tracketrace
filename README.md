@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Landing Page de Rastreamento de Pacotes
 
-## Getting Started
+Esta é a landing page do nosso sistema que inclui uma tela de propaganda do produto e uma funcionalidade para que os clientes possam rastrear seus pacotes com um código de rastreamento. O cliente pode ver a localização do pacote em tempo real em um mapa.
 
-First, run the development server:
+## Funcionalidades
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Tela de Propaganda**: Apresenta informações e promoções sobre o produto.
+- **Rastreamento em Tempo Real**: Permite que os clientes insiram um código de rastreamento para visualizar a localização do pacote em um mapa.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pré-requisitos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js e npm/yarn instalados.
+- Chave de API do Google Maps.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Instalação
 
-## Learn More
+1. **Clone o repositório:**
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    git clone https://github.com/Track-Trace-TCC/landing-page-tracketrace
+    cd landing-page-tracketrace
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Instale as dependências:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    npm install
+    # ou
+    yarn install
+    ```
 
-## Deploy on Vercel
+3. **Configure as variáveis de ambiente:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Crie um arquivo `.env.local` na raiz do projeto com as seguintes variáveis de ambiente:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```bash
+    NEXT_PUBLIC_API_URL='YOUR API URL'
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY='YOUR GOOGLE KEY'
+    ```
+
+    - **`NEXT_PUBLIC_API_URL`**: URL da API para buscar os dados de rastreamento do pacote.
+    - **`NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`**: Chave de API do Google Maps para exibir o mapa.
+
+## Uso
+
+1. **Execute o projeto:**
+
+    ```bash
+    npm run dev
+    # ou
+    yarn dev
+    ```
+
+2. **Acesse a aplicação:**
+
+    Abra o navegador e acesse [http://localhost:3000](http://localhost:3000).
+
+3. **Utilize a landing page:**
+
+    - **Tela de Propaganda**: Navegue para a página principal para ver as informações sobre o produto.
+    - **Rastreamento**: Vá para a página de rastreamento, insira o código do pacote e veja a localização em tempo real no mapa.
+
+## Tecnologias Utilizadas
+
+- **Next.js**: Framework React para renderização do lado do servidor e criação de aplicações web.
+- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **Google Maps API**: API para exibição de mapas e localização em tempo real.
+- **CSS Modules**: Para estilos modulares e reutilizáveis.
+
+## Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## Contato
+
+Se tiver dúvidas ou sugestões, entre em contato pelo email: [viniciusataides@gmail.com](mailto:viniciusataides@gmail.com).
+
