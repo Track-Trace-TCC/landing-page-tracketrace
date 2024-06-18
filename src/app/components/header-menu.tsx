@@ -39,7 +39,7 @@ export function HeaderMenu() {
                             <li><Link href="/#inicio" onClick={handleCloseMenu} className="block text-center text-gray-800 hover:text-gray-600 px-4 py-2">Início</Link></li>
                             <li><Link href="/#sobre" onClick={handleCloseMenu} className="block text-center text-gray-800 hover:text-gray-600 px-4 py-2">Sobre nós</Link></li>
                             <li><Link href="/#contato" onClick={handleCloseMenu} className="block text-center text-gray-800 hover:text-gray-600 px-4 py-2">Contato</Link></li>
-                            <li><Link href="/rastrear" className="block text-center text-gray-800 hover:text-gray-600 px-4 py-2">Rastreamento</Link></li>
+                            <li><Link href="/rastreamento" className="block text-center text-gray-800 hover:text-gray-600 px-4 py-2">Rastreamento</Link></li>
                         </ul>
                     </nav>
                 </div>

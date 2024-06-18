@@ -9,23 +9,29 @@ export function useMap(containerRef: React.RefObject<HTMLDivElement>) {
     React.useEffect(() => {
 
         (async () => {
-            const loader = new Loader({
-                libraries: ['routes', 'geometry'],
-                apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
-            });
+            try {
+                const loader = new Loader({
+                    libraries: ['routes', 'geometry'],
+                    apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+                });
+                const [, , position] = await Promise.all([
+                    loader.importLibrary('routes'),
+                    loader.importLibrary('geometry'),
+                    await getCurrentPosition({ enableHighAccuracy: true })
+                ]);
 
-            const [, , position] = await Promise.all([
-                loader.importLibrary('routes'),
-                loader.importLibrary('geometry'),
-                await getCurrentPosition({ enableHighAccuracy: true })
-            ]);
+                const map = new Map(containerRef.current!, {
+                    zoom: 15,
+                    center: position,
 
-            const map = new Map(containerRef.current!, {
-                zoom: 15,
-                center: position,
-            });
+                });
 
-            setMap(map);
+                console.log(map)
+                setMap(map);
+            } catch (error) {
+                console.log(error)
+            }
+
         })();
     }, [containerRef])
 
